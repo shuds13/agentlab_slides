@@ -1,6 +1,6 @@
-# Build outputs
+# Build outputs. agentlab.pdf is tracked so the deck is readable on GitHub
+# without building it.
 agentlab.pptx
-agentlab.pdf
 agentlab_diagram.pptx
 agentlab_workspace.pptx
 agentlab_slack.pptx

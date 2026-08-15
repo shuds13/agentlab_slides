@@ -1,5 +1,7 @@
 # AgentLab slides
 
+**[View the deck →](agentlab.pdf)**
+
 A talk on [AgentLab](https://github.com/shuds13/AgentLab), built with
 `python-pptx`. Every slide is native PowerPoint shapes, so the `.pptx` can be
 edited directly — but a rebuild overwrites it, so edit by hand only once you
