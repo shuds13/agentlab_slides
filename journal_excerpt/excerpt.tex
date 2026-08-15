@@ -1,0 +1,83 @@
+% An illustrative journal page, letter size at 11pt so the type sits at real
+% proportions when the page is shown small on a slide.
+%
+% The campaign is invented. Every number comes from figure.py, which also
+% writes table_rows.tex, so the prose, the table and the plot agree.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+\setcounter{section}{2}
+\setcounter{figure}{2}
+\setcounter{page}{4}
+
+\section{Cycle 3: the ring/recursive-doubling crossover is not fixed}
+
+\paragraph{Observe.} Cycle 2 showed that the runtime's default selection beats
+neither algorithm consistently: it is faster than ring below roughly 100\,KiB
+and slower than recursive doubling above 2\,MiB, at 128 ranks. That pattern is
+what a fixed internal threshold looks like. Whether the threshold is merely
+mistuned or wrong in form is the open question, and it decides whether the
+campaign should recommend a value or a rule.
+
+\paragraph{Hypothesize.} Ring all-reduce moves $2(N-1)/N$ of the buffer per rank
+and is bandwidth-optimal, so it should win on large messages; recursive
+doubling completes in $2\log_2 N$ steps and should win on small ones. The
+switch point is a property of the two cost models, so it should sit near
+512\,KiB and depend only weakly on rank count.
+
+\paragraph{Predict.} If the crossover is rank-independent, the three sweeps
+below will place it within a factor of two of each other. If instead the
+latency term dominates at scale, the crossover will grow with $N$, and a single
+threshold will mis-select badly at 512 ranks.
+
+\paragraph{Experiment.} Both algorithms swept over 16\,KiB--32\,MiB at 32, 128
+and 512 ranks; five repeats at each point, median reported. The selection
+threshold was pinned so the runtime could not substitute its own choice
+(\texttt{cycle3\_crossover.py}).
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrl}
+\toprule
+ranks & crossover (KiB) & ring @1\,MiB (µs) & rec.\ dbl.\ @1\,MiB (µs) & cheaper @1\,MiB \\
+\midrule
+\input{table_rows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{crossover.pdf}
+\caption{Ring (solid) against recursive doubling (dashed) at three rank counts.
+Markers give the crossover. It moves right as $N$ grows, so no horizontal line
+separates the two regimes for all three sweeps at once.}
+\end{figure}
+
+\paragraph{Interpret.} The crossover is real but it moves: 509\,KiB at 32 ranks,
+1.4\,MiB at 128 and 4.2\,MiB at 512 --- a factor of 8.4 across the range, well
+outside the factor of two the prediction allowed. Rank-independence is refuted.
+A threshold chosen at 32 ranks sends every message between 509\,KiB and 4.2\,MiB
+to ring at 512 ranks, where recursive doubling is cheaper by as much as
+$6\times$ at the low end of that band; at 1\,MiB it is 3{,}270\,µs against
+976\,µs.
+
+This also disposes of the mistuning reading from Cycle 2. No constant is
+correct, so the recommendation cannot be a number. What the campaign should
+produce instead is a rule in $N$, and the shape of the two cost models suggests
+the crossover scales as $(N-1)/\log_2 N$ once the latency term dominates ---
+which the measured points follow to within 5\% across the three sweeps.
+
+\section{Cycle 4: does the crossover track $(N-1)/\log_2 N$?}
+
+\paragraph{Observe.} Three points are enough to refute a constant but not
+enough to fit a rule. Cycle 3's residuals are small, but 32, 128 and 512 span
+only two decades and are all powers of two, so a $\log_2 N$ term and a linear
+term are hard to separate.
+
+\end{document}

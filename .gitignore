@@ -1,0 +1,25 @@
+# Build outputs
+agentlab.pptx
+agentlab.pdf
+agentlab_diagram.pptx
+agentlab_workspace.pptx
+agentlab_slack.pptx
+
+# Preview renders
+agentlab*.png
+*_zoom.png
+
+# LaTeX intermediates and outputs of journal_excerpt/figure.py.
+# journal_excerpt/excerpt.png is deliberately tracked: it lets the deck be
+# rebuilt with python-pptx alone, without a LaTeX install.
+journal_excerpt/crossover.pdf
+journal_excerpt/table_rows.tex
+journal_excerpt/excerpt.pdf
+journal_excerpt/excerpt.aux
+journal_excerpt/excerpt.log
+
+__pycache__/
+*.pyc
+
+# Local scratch, not part of the deck
+bkups/
