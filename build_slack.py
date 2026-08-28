@@ -31,7 +31,7 @@ from slidekit import (
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SHOT = os.path.join(HERE, "slack_thread.png")
-SHOT_ASPECT = 593 / 296
+SHOT_ASPECT = 720 / 283
 
 def add(prs):
     slide = blank_slide(prs)
@@ -43,8 +43,11 @@ def add(prs):
         "and redirect it — from Slack.",
     )
 
-    COL_X, COL_W = 0.62, 2.30
-    SLACK_X, SLACK_W = 4.15, 2.30
+    COL_X, COL_W = 0.50, 2.30
+    SLACK_X, SLACK_W = 4.08, 1.21
+    # the screenshot sets the width of the right column: it is shown at its
+    # native 720 px / 99.7 px-per-inch, so its type matches the slide's.
+    RIGHT_X, RIGHT_W = 5.61, 7.22
     MID = COL_X + COL_W / 2
     GAP_L, GAP_R = COL_X + COL_W, SLACK_X
     ROWS = [2.28, 3.63, 4.98]
@@ -95,13 +98,13 @@ def add(prs):
          [("Status / Answers", 8.5, ARROW, False, False)])
 
     # a standalone note, not part of the Slack path at all
-    note = box(slide, 6.85, 1.60, 5.95, 0.54, fill=GREY_BG, stroke=HAIRLINE,
+    note = box(slide, RIGHT_X, 1.60, RIGHT_W, 0.54, fill=GREY_BG, stroke=HAIRLINE,
                line_w=1.0, radius=0.14)
     label_box(note, [("You can put an announcement in ANNOUNCEMENTS.md for the "
                       "agents at any time.", 10, SLATE, False, False)])
 
     # ------------------------------------------------------------ the thread
-    SHOT_X, SHOT_W = 6.85, 5.95
+    SHOT_X, SHOT_W = RIGHT_X, RIGHT_W
     SHOT_H = SHOT_W / SHOT_ASPECT
     SHOT_Y = 2.40
     pic = slide.shapes.add_picture(SHOT, Inches(SHOT_X), Inches(SHOT_Y),

@@ -30,13 +30,13 @@ def add(prs):
     title_block(
         slide,
         "How a campaign runs",
-        "You give an agent a goal and a system. It runs the investigation itself.",
+        "The agent runs user-side and submits work to remote systems.",
     )
 
     # ---- LLM service
     llm = box(slide, 0.5, 1.32, 3.10, 0.72, fill=VIOLET_BG, stroke=VIOLET)
     label_box(llm, [("LLM service", 13, VIOLET, True, False),
-                    ("Argo · the agent's reasoning", 9.5, MUTED, False, False)])
+                    ("the agent's reasoning", 9.5, MUTED, False, False)])
 
     # ---- your machine panel
     box(slide, 0.5, 2.30, 3.10, 3.30, fill=PANEL_BG, stroke=HAIRLINE,

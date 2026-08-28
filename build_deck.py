@@ -6,7 +6,8 @@
   3  how a campaign runs        (build_diagram.py)
   4  the workspace              (build_workspace.py)
   5  human in the loop          (build_slack.py)
-  6  getting started
+  6  built on the Claude Agent SDK  (build_sdk.py)
+  7  getting started
 
 Each slide module exposes add(prs) and can still be run on its own to produce a
 single-slide pptx.
@@ -23,6 +24,7 @@ import subprocess
 from pptx.enum.text import PP_ALIGN
 
 import build_diagram
+import build_sdk
 import build_slack
 import build_workspace
 from slidekit import (
@@ -128,7 +130,7 @@ def getting_started_slide(prs):
     STEPS = [
         ("1   Clone it", f"git clone https://{REPO}", False),
         ("2   Start your agent in it", "cd AgentLab && claude", False),
-        ("3   Say", "“Help me set up a campaign.”", True),
+        ("3   Say", "“Help me set up.”", True),
     ]
     x, w, gap = 0.62, 3.94, 0.30
     for i, (head, line, quoted) in enumerate(STEPS):
@@ -182,6 +184,7 @@ def main():
     build_diagram.add(prs)
     build_workspace.add(prs)
     build_slack.add(prs)
+    build_sdk.add(prs)
     getting_started_slide(prs)
 
     pptx = os.path.join(HERE, "agentlab.pptx")

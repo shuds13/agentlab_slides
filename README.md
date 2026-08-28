@@ -33,7 +33,8 @@ python3 build_workspace.py      # -> agentlab_workspace.pptx
 | 3 | how a campaign runs — `build_diagram.py` |
 | 4 | the workspace — `build_workspace.py` |
 | 5 | human in the loop — `build_slack.py` |
-| 6 | getting started |
+| 6 | built on the Claude Agent SDK — `build_sdk.py` |
+| 7 | getting started |
 
 `slidekit.py` holds the palette and the drawing helpers. Change a colour there
 and it changes everywhere.
@@ -61,10 +62,13 @@ pdftoppm -r 200 -png -f 1 -l 1 -singlefile excerpt.pdf excerpt
 
 ## Sources
 
-Slides 3–6 make factual claims about AgentLab. Where a claim comes from a
+Slides 3–7 make factual claims about AgentLab. Where a claim comes from a
 specific file, the build script's docstring cites it — for example the file
 list on slide 4 is from `framework/SYSTEM.md` and `framework/tools.py`. Check
 those references against the repository when it changes.
+
+Slide 6 describes the Claude Agent SDK rather than AgentLab, so `build_sdk.py`
+cites the SDK documentation instead.
 
 `AGENTLAB-SLACK-HANDOFF.md` in the AgentLab working tree is out of date on the
 secretary; `build_slack.py` documents what the slide shows instead.
