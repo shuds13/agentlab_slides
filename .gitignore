@@ -1,10 +1,17 @@
 # Build outputs. agentlab.pdf is tracked so the deck is readable on GitHub
 # without building it.
 agentlab.pptx
+agentlab_long.pptx
 agentlab_diagram.pptx
 agentlab_workspace.pptx
 agentlab_slack.pptx
 agentlab_sdk.pptx
+agentlab_title_alt.pptx
+agentlab_background.pptx
+agentlab_tutorial.pptx
+agentlab_tutorial_install.pptx
+agentlab_tutorial_globus.pptx
+agentlab_tutorial_dirs.pptx
 
 # Preview renders
 agentlab*.png

@@ -1,21 +1,27 @@
 #!/usr/bin/env python3
-"""Assemble the AgentLab deck.
+"""Assemble the AgentLab decks.
 
-  1  title
+Two decks are built from the same slide modules. DECKS below is the whole
+definition of what each one contains; a slide joins a deck by being listed
+there, and belongs to both by being in BODY.
+
+  agentlab       the short talk, and the one the README links
+  agentlab_long  the alternative title, a background slide, then the same
+
+  1  title                          (build_title_alt.py in the long deck)
   2  what it is, and where the code is
-  3  how a campaign runs        (build_diagram.py)
-  4  the workspace              (build_workspace.py)
-  5  human in the loop          (build_slack.py)
+  3  how a campaign runs            (build_diagram.py)
+  4  the workspace                  (build_workspace.py)
+  5  human in the loop              (build_slack.py)
   6  built on the Claude Agent SDK  (build_sdk.py)
   7  getting started
 
 Each slide module exposes add(prs) and can still be run on its own to produce a
 single-slide pptx.
 
-    python3 build_deck.py            -> agentlab.pptx
-    soffice --headless --convert-to pdf agentlab.pptx
+    python3 build_deck.py
 
-Output: agentlab.pptx
+Output: agentlab.pptx / .pdf and agentlab_long.pptx / .pdf
 """
 
 import os
@@ -23,9 +29,15 @@ import subprocess
 
 from pptx.enum.text import PP_ALIGN
 
+import build_background
 import build_diagram
 import build_sdk
 import build_slack
+import build_title_alt
+import build_tutorial
+import build_tutorial_dirs
+import build_tutorial_globus
+import build_tutorial_install
 import build_workspace
 from slidekit import (
     new_deck, blank_slide, title_block, box, label_box, text,
@@ -177,17 +189,27 @@ def getting_started_slide(prs):
     return slide
 
 
-def main():
-    prs = new_deck()
-    title_slide(prs)
-    intro_slide(prs)
-    build_diagram.add(prs)
-    build_workspace.add(prs)
-    build_slack.add(prs)
-    build_sdk.add(prs)
-    getting_started_slide(prs)
+# everything after the title slide, shared by both decks
+BODY = [intro_slide, build_diagram.add, build_workspace.add, build_slack.add,
+        build_sdk.add, getting_started_slide]
 
-    pptx = os.path.join(HERE, "agentlab.pptx")
+# the tutorial closes the long talk; swap these two to reorder 2 and 3
+TUTORIAL = [build_tutorial.add, build_tutorial_install.add,
+            build_tutorial_dirs.add, build_tutorial_globus.add]
+
+DECKS = {
+    "agentlab": [title_slide] + BODY,
+    "agentlab_long": ([build_title_alt.add, build_background.add] + BODY
+                      + TUTORIAL),
+}
+
+
+def build(name, slides):
+    prs = new_deck()
+    for add_slide in slides:
+        add_slide(prs)
+
+    pptx = os.path.join(HERE, name + ".pptx")
     prs.save(pptx)
     print("wrote", pptx)
 
@@ -195,7 +217,12 @@ def main():
                     pptx, "--outdir", HERE],
                    check=True, stdout=subprocess.DEVNULL,
                    stderr=subprocess.DEVNULL)
-    print("wrote", os.path.join(HERE, "agentlab.pdf"))
+    print("wrote", os.path.join(HERE, name + ".pdf"))
+
+
+def main():
+    for name, slides in DECKS.items():
+        build(name, slides)
 
 
 if __name__ == "__main__":
