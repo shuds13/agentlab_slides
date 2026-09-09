@@ -70,5 +70,3 @@ those references against the repository when it changes.
 Slide 6 describes the Claude Agent SDK rather than AgentLab, so `build_sdk.py`
 cites the SDK documentation instead.
 
-`AGENTLAB-SLACK-HANDOFF.md` in the AgentLab working tree is out of date on the
-secretary; `build_slack.py` documents what the slide shows instead.
