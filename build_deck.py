@@ -1,20 +1,12 @@
 #!/usr/bin/env python3
 """Assemble the AgentLab decks.
 
-Two decks are built from the same slide modules. DECKS below is the whole
-definition of what each one contains; a slide joins a deck by being listed
-there, and belongs to both by being in BODY.
+DECKS lists the slides of each deck, in order. A slide is in a deck because it
+is named in that deck's list, and nowhere else.
 
   agentlab       the short talk, and the one the README links
-  agentlab_long  the alternative title, a background slide, then the same
-
-  1  title                          (build_title_alt.py in the long deck)
-  2  what it is, and where the code is
-  3  how a campaign runs            (build_diagram.py)
-  4  the workspace                  (build_workspace.py)
-  5  human in the loop              (build_slack.py)
-  6  built on the Claude Agent SDK  (build_sdk.py)
-  7  getting started
+  agentlab_long  the longer talk: its own title slide, background, future work
+                 and the tutorial
 
 Each slide module exposes add(prs) and can still be run on its own to produce a
 single-slide pptx.
@@ -31,6 +23,8 @@ from pptx.enum.text import PP_ALIGN
 
 import build_background
 import build_diagram
+import build_features
+import build_future
 import build_sdk
 import build_slack
 import build_title_alt
@@ -191,20 +185,34 @@ def getting_started_slide(prs):
     return slide
 
 
-# everything after the title slide, shared by both decks
-BODY = [intro_slide, build_diagram.add, build_workspace.add, build_slack.add,
-        build_sdk.add, getting_started_slide]
-
-# the tutorial closes the long talk; swap these two to reorder 2 and 3
-TUTORIAL = [build_tutorial.add, build_tutorial_install.add,
-            build_tutorial_dirs.add, build_tutorial_globus.add,
-            build_tutorial_globus_run.add,
-            build_tutorial_slack.add]
-
 DECKS = {
-    "agentlab": [title_slide] + BODY,
-    "agentlab_long": ([build_title_alt.add, build_background.add] + BODY
-                      + TUTORIAL),
+    "agentlab": [
+        title_slide,
+        intro_slide,
+        build_diagram.add,
+        build_workspace.add,
+        build_slack.add,
+        build_sdk.add,
+        getting_started_slide,
+    ],
+    "agentlab_long": [
+        build_title_alt.add,
+        build_background.add,
+        intro_slide,
+        build_diagram.add,
+        build_workspace.add,
+        build_slack.add,
+        build_sdk.add,
+        build_features.add,
+        build_future.add,
+        getting_started_slide,
+        build_tutorial.add,
+        build_tutorial_install.add,
+        build_tutorial_dirs.add,
+        build_tutorial_globus.add,
+        build_tutorial_globus_run.add,
+        build_tutorial_slack.add,
+    ],
 }
 
 
