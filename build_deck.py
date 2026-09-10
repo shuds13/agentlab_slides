@@ -38,6 +38,7 @@ import build_tutorial
 import build_tutorial_dirs
 import build_tutorial_globus
 import build_tutorial_install
+import build_tutorial_slack
 import build_workspace
 from slidekit import (
     new_deck, blank_slide, title_block, box, label_box, text,
@@ -195,7 +196,8 @@ BODY = [intro_slide, build_diagram.add, build_workspace.add, build_slack.add,
 
 # the tutorial closes the long talk; swap these two to reorder 2 and 3
 TUTORIAL = [build_tutorial.add, build_tutorial_install.add,
-            build_tutorial_dirs.add, build_tutorial_globus.add]
+            build_tutorial_dirs.add, build_tutorial_globus.add,
+            build_tutorial_slack.add]
 
 DECKS = {
     "agentlab": [title_slide] + BODY,
