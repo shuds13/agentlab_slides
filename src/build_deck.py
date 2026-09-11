@@ -4,20 +4,22 @@
 DECKS lists the slides of each deck, in order. A slide is in a deck because it
 is named in that deck's list, and nowhere else.
 
-  agentlab           the lightning talk, and the one the README links
-  agentlab_long      the longer talk
-  agentlab_tutorial  Getting started, then the tutorial
+  short     the lightning talk, and the one the README links
+  long      the longer talk
+  tutorial  Getting started, then the tutorial
 
 Each slide module exposes add(prs) and can still be run on its own to produce a
 single-slide pptx.
 
-    python3 build_deck.py
+    python3 src/build_deck.py                 # all of them
+    python3 src/build_deck.py tutorial        # one, by name
 
-Output: a .pptx and .pdf for each deck
+Output: a .pptx and .pdf for each deck built
 """
 
 import os
 import subprocess
+import sys
 
 from pptx.enum.text import PP_ALIGN
 
@@ -186,7 +188,7 @@ def getting_started_slide(prs):
 
 
 DECKS = {
-    "agentlab": [
+    "short": ("agentlab", [
         title_slide,
         intro_slide,
         build_diagram.add,
@@ -194,8 +196,8 @@ DECKS = {
         build_slack.add,
         build_sdk.add,
         getting_started_slide,
-    ],
-    "agentlab_long": [
+    ]),
+    "long": ("agentlab_long", [
         build_title_alt.add,
         build_background.add,
         intro_slide,
@@ -212,8 +214,8 @@ DECKS = {
         build_tutorial_globus.add,
         build_tutorial_globus_run.add,
         build_tutorial_slack.add,
-    ],
-    "agentlab_tutorial": [
+    ]),
+    "tutorial": ("agentlab_tutorial", [
         getting_started_slide,
         build_tutorial_intro.add,
         build_tutorial_install.add,
@@ -221,7 +223,7 @@ DECKS = {
         build_tutorial_globus.add,
         build_tutorial_globus_run.add,
         build_tutorial_slack.add,
-    ],
+    ]),
 }
 
 
@@ -241,10 +243,16 @@ def build(name, slides):
     print("wrote", os.path.join(ROOT, name + ".pdf"))
 
 
-def main():
-    for name, slides in DECKS.items():
-        build(name, slides)
+def main(names):
+    """Build the decks named, or all of them."""
+    unknown = [n for n in names if n not in DECKS]
+    if unknown:
+        raise SystemExit(f"unknown deck {unknown[0]!r} — "
+                         f"choose from {', '.join(DECKS)}")
+    for name in names or DECKS:
+        stem, slides = DECKS[name]
+        build(stem, slides)
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
