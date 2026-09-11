@@ -58,23 +58,33 @@ def add(prs):
                  width=12.10)
     text(slide, LX + 0.10, y, 11.90, 0.30,
          [(INVITE, 10, INK, False, False)], align=PP_ALIGN.LEFT, font=MONO)
-    text(slide, LX + 0.10, y + 0.34, 11.90, 0.30,
+    _bullet(slide, LX, y + 0.34, "Create a new channel in the workspace — you will point your app at this channel",
+            width=12.10)
+    text(slide, LX + 0.10, y + 0.72, 11.90, 0.30,
          [("link expires…", 11, FAINT, False, True)], align=PP_ALIGN.LEFT)
 
-    y = _heading(slide, LX, 2.86,
+    y = _heading(slide, LX, 3.16,
                  "Ask your agent (in AgentLab repo) to help setup slack.")
     y = _bullet(slide, LX, y, "It will take you through the process")
+    y = _bullet(slide, LX, y, "Choose: setting up new lab")
     _bullet(slide, LX, y, "You can set up notifications only, or 2-way comms.")
 
-    y = _heading(slide, RX, 2.86,
+    y = _heading(slide, RX, 3.16,
                  "Create a slack app for any workspace — some may require "
                  "approval.")
     _bullet(slide, RX, y, "Approval request happens in the process.")
 
-    y = _heading(slide, LX, 4.44,
+    y = _heading(slide, LX, 4.86,
                  "Note to allow messaging Agent from slack:", width=12.10)
     text(slide, LX + 0.10, y, 11.90, 0.32,
          [(SCOPES, 11, INK, False, False)], align=PP_ALIGN.LEFT, font=MONO)
+
+    text(slide, LX, 5.86, 12.10, 0.34,
+         [("Your agent should set up a lab.yaml. You can then start the slack "
+           "bridge with", 12, SLATE, False, False)], align=PP_ALIGN.LEFT)
+    text(slide, LX + 0.10, 6.24, 11.90, 0.32,
+         [("bin/lab.sh start", 12, INK, False, False)],
+         align=PP_ALIGN.LEFT, font=MONO)
     return slide
 
 
