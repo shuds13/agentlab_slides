@@ -4,7 +4,7 @@
 Names the three things the tutorial covers. One slide follows per item, in the
 order listed here; the order lives in build_deck.py's DECKS.
 
-Output: agentlab_tutorial.pptx
+Output: agentlab_tutorial_intro.pptx
 """
 
 import os
@@ -39,6 +39,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_tutorial.pptx")
+    dest = os.path.join(HERE, "agentlab_tutorial_intro.pptx")
     deck.save(dest)
     print("wrote", dest)

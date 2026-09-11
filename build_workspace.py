@@ -15,7 +15,12 @@ real ones, from framework/SYSTEM.md and framework/tools.py:
   runs/                            the prompts each run started from
 
 The journal page is built by journal_excerpt/ at letter size, then shown small,
-so the type sits at the proportions of a real document. Rebuild it with:
+so the type sits at the proportions of a real document. The campaign in it is
+invented; its numbers come from figure.py, which computes them from the cost
+models of the two collectives and writes both the plot and the table rows, so
+the prose, the table and the figure cannot disagree. journal_excerpt/
+excerpt.png is tracked, so building the deck needs only python-pptx. Changing
+the page needs LaTeX and matplotlib:
 
     cd journal_excerpt && python3 figure.py && pdflatex excerpt.tex \
         && pdftoppm -r 200 -png -f 1 -l 1 -singlefile excerpt.pdf excerpt

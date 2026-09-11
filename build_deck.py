@@ -4,16 +4,16 @@
 DECKS lists the slides of each deck, in order. A slide is in a deck because it
 is named in that deck's list, and nowhere else.
 
-  agentlab       the short talk, and the one the README links
-  agentlab_long  the longer talk: its own title slide, background, future work
-                 and the tutorial
+  agentlab           the lightning talk, and the one the README links
+  agentlab_long      the longer talk
+  agentlab_tutorial  Getting started, then the tutorial
 
 Each slide module exposes add(prs) and can still be run on its own to produce a
 single-slide pptx.
 
     python3 build_deck.py
 
-Output: agentlab.pptx / .pdf and agentlab_long.pptx / .pdf
+Output: a .pptx and .pdf for each deck
 """
 
 import os
@@ -28,7 +28,7 @@ import build_future
 import build_sdk
 import build_slack
 import build_title_alt
-import build_tutorial
+import build_tutorial_intro
 import build_tutorial_dirs
 import build_tutorial_globus
 import build_tutorial_globus_run
@@ -206,7 +206,16 @@ DECKS = {
         build_features.add,
         build_future.add,
         getting_started_slide,
-        build_tutorial.add,
+        build_tutorial_intro.add,
+        build_tutorial_install.add,
+        build_tutorial_dirs.add,
+        build_tutorial_globus.add,
+        build_tutorial_globus_run.add,
+        build_tutorial_slack.add,
+    ],
+    "agentlab_tutorial": [
+        getting_started_slide,
+        build_tutorial_intro.add,
         build_tutorial_install.add,
         build_tutorial_dirs.add,
         build_tutorial_globus.add,
