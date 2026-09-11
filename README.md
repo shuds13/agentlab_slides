@@ -12,7 +12,7 @@ pip install python-pptx
 python3 src/build_deck.py
 ```
 
-or selected deck.
+or selected deck
 
 ```
 python3 src/build_deck.py short
@@ -20,7 +20,7 @@ python3 src/build_deck.py short
 
 
 That writes a `.pptx` for each deck built, and if
-LibreOffice is on the PATH a `.pdf` beside it.
+LibreOffice is on the PATH a `.pdf`, beside it.
 
 
 ## Decks
