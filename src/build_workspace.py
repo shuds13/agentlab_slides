@@ -36,13 +36,13 @@ from pptx.enum.text import PP_ALIGN
 from pptx.enum.shapes import MSO_SHAPE
 
 from slidekit import (
+    ROOT,
     arc_arrow, round_picture,
     new_deck, blank_slide, title_block, box, label_box, text, arrow,
     MONO, MUTED, FAINT, BLUE, BLUE_BG, SLATE, GREY_BG, HAIRLINE, ARROW, WHITE,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-PAGE = os.path.join(HERE, "journal_excerpt", "excerpt.png")
+PAGE = os.path.join(ROOT, "journal_excerpt", "excerpt.png")
 PAGE_ASPECT = 1700 / 2200        # letter
 
 def add(prs):
@@ -151,6 +151,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_workspace.pptx")
+    dest = os.path.join(ROOT, "agentlab_workspace.pptx")
     deck.save(dest)
     print("wrote", dest)

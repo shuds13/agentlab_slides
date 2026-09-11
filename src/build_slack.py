@@ -24,13 +24,13 @@ from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
 
 from slidekit import (
+    ROOT, IMAGES,
     round_picture, new_deck, blank_slide, title_block, box, label_box, text,
     arrow, MONO, MUTED, FAINT, BLUE, BLUE_BG, VIOLET, VIOLET_BG, TEAL, TEAL_BG,
     SLATE, GREY_BG, HAIRLINE, ARROW,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-SHOT = os.path.join(HERE, "slack_thread.png")
+SHOT = os.path.join(IMAGES, "slack_thread.png")
 SHOT_ASPECT = 720 / 283
 
 def add(prs):
@@ -128,6 +128,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_slack.pptx")
+    dest = os.path.join(ROOT, "agentlab_slack.pptx")
     deck.save(dest)
     print("wrote", dest)

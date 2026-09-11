@@ -4,6 +4,7 @@ White background, native editable shapes, 16:9.
 """
 
 import math
+import os
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -12,6 +13,10 @@ from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.dml import MSO_LINE_DASH_STYLE
 from pptx.oxml.ns import qn
+
+# src/ holds the build scripts; everything they read and write lives beside it
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+IMAGES = os.path.join(ROOT, "images")
 
 FONT = "Calibri"
 MONO = "Consolas"

@@ -14,13 +14,13 @@ import os
 from pptx.enum.text import PP_ALIGN
 
 from slidekit import (
+    ROOT,
     new_deck, blank_slide, title_block, box, label_box, text, arrow,
     INK, MUTED, FAINT, BLUE, BLUE_BG, VIOLET, VIOLET_BG, TEAL, TEAL_BG,
     AMBER, AMBER_BG, SLATE, GREY, GREY_BG, PANEL_BG, HAIRLINE, ARROW,
     RETURN, WHITE,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
 FLOW_Y = 3.20   # every box on the main flow is centred on this line
 
 
@@ -132,6 +132,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_diagram.pptx")
+    dest = os.path.join(ROOT, "agentlab_diagram.pptx")
     deck.save(dest)
     print("wrote", dest)

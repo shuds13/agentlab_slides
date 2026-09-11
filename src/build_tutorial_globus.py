@@ -12,11 +12,11 @@ import os
 from pptx.enum.text import PP_ALIGN
 
 from slidekit import (
+    ROOT,
     new_deck, blank_slide, title_block, box, text,
     MONO, INK, FAINT, BLUE, SLATE, GREY_BG, HAIRLINE,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
 
 HEAD_H, ITEM_H = 0.36, 0.32
 COL_W = 5.85
@@ -96,6 +96,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_tutorial_globus.pptx")
+    dest = os.path.join(ROOT, "agentlab_tutorial_globus.pptx")
     deck.save(dest)
     print("wrote", dest)

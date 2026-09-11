@@ -16,10 +16,10 @@ from pptx.util import Inches
 from pptx.enum.text import PP_ALIGN
 
 from slidekit import (
+    ROOT, IMAGES,
     new_deck, blank_slide, box, text, MONO, INK, MUTED, BLUE, SLATE,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = "github.com/shuds13/AgentLab"
 
 LOGOS = [("anl.png", 366 / 137), ("fastmath_logo.png", 308 / 90)]
@@ -52,7 +52,7 @@ def add(prs):
     x = 1.06
     for name, aspect in LOGOS:
         w = LOGO_H * aspect
-        slide.shapes.add_picture(os.path.join(HERE, name), Inches(x),
+        slide.shapes.add_picture(os.path.join(IMAGES, name), Inches(x),
                                  Inches(LOGO_Y), Inches(w), Inches(LOGO_H))
         x += w + LOGO_GAP
     return slide
@@ -61,6 +61,6 @@ def add(prs):
 if __name__ == "__main__":
     deck = new_deck()
     add(deck)
-    dest = os.path.join(HERE, "agentlab_title_alt.pptx")
+    dest = os.path.join(ROOT, "agentlab_title_alt.pptx")
     deck.save(dest)
     print("wrote", dest)

@@ -36,12 +36,12 @@ import build_tutorial_install
 import build_tutorial_slack
 import build_workspace
 from slidekit import (
+    ROOT,
     new_deck, blank_slide, title_block, box, label_box, text,
     MONO, INK, MUTED, FAINT, BLUE, BLUE_BG, TEAL, TEAL_BG, AMBER, SLATE,
     GREY_BG, HAIRLINE, VIOLET, VIOLET_BG,
 )
 
-HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = "github.com/shuds13/AgentLab"
 CAS = "github.com/shuds13/cas-framework"
 
@@ -230,15 +230,15 @@ def build(name, slides):
     for add_slide in slides:
         add_slide(prs)
 
-    pptx = os.path.join(HERE, name + ".pptx")
+    pptx = os.path.join(ROOT, name + ".pptx")
     prs.save(pptx)
     print("wrote", pptx)
 
     subprocess.run(["soffice", "--headless", "--convert-to", "pdf",
-                    pptx, "--outdir", HERE],
+                    pptx, "--outdir", ROOT],
                    check=True, stdout=subprocess.DEVNULL,
                    stderr=subprocess.DEVNULL)
-    print("wrote", os.path.join(HERE, name + ".pdf"))
+    print("wrote", os.path.join(ROOT, name + ".pdf"))
 
 
 def main():
