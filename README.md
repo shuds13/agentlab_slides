@@ -9,14 +9,19 @@ Talks on [AgentLab](https://github.com/shuds13/AgentLab), built with
 
 ```
 pip install python-pptx
-python3 src/build_deck.py                    # all three
-python3 src/build_deck.py short              # one deck
-python3 src/build_deck.py long tutorial      # or several
+python3 src/build_deck.py
 ```
 
-That writes a `.pptx` for each deck built, at the repository root, and if
-LibreOffice is on the PATH a `.pdf` beside it. The build scripts live in
-`src/`, the pictures they place in `images/`.
+or selected deck.
+
+```
+python3 src/build_deck.py short
+```
+
+
+That writes a `.pptx` for each deck built, and if
+LibreOffice is on the PATH a `.pdf` beside it.
+
 
 ## Decks
 
@@ -28,6 +33,11 @@ slide is in a deck because it is named in that deck's list.
 | `short` | the lightning talk | `agentlab.pdf` | [slides](short_talk.md) |
 | `long` | the longer talk | `agentlab_long.pdf` | [slides](long_talk.md) |
 | `tutorial` | Getting started, then the tutorial | `agentlab_tutorial.pdf` | [slides](tutorial.md) |
+
+```
+python3 src/build_deck.py short              # one deck
+python3 src/build_deck.py long tutorial      # or several
+```
 
 Each slide is also a module exposing `add(prs)`, and each runs standalone to
 produce a single-slide file for iterating on one slide in isolation:
