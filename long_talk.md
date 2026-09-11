@@ -1,6 +1,7 @@
-# Longer talk — `agentlab_long`
+# Longer talk — `long`
 
-No PDF is tracked for this one. Build it with `python3 src/build_deck.py`.
+No PDF is tracked for this one. Build it with
+`python3 src/build_deck.py long`.
 
 | | |
 |---|---|

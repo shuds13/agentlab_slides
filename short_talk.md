@@ -1,4 +1,4 @@
-# Lightning talk — `agentlab`
+# Lightning talk — `short`
 
 Built as `agentlab.pdf`, which the README links.
 

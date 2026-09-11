@@ -1,4 +1,4 @@
-# Tutorial — `agentlab_tutorial`
+# Tutorial — `tutorial`
 
 Built as `agentlab_tutorial.pdf`, which the README links. The same slides close
 the longer talk.
